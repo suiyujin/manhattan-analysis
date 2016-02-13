@@ -29,6 +29,9 @@ class ShiritorisController < ApplicationController
     word = result.match(/^[^\s]+/)[0]
     logger.info("word : #{word}")
 
+    # 「やふー」例外処理
+    word = 'やふー' if word == 'や' && word_yahoo?(result)
+
     if result =~ /\A0/ || word == 'error'
       logger.info("0 : 認識不可!")
       res_json = { status: 0, message: "認識不可！" }
@@ -46,6 +49,10 @@ class ShiritorisController < ApplicationController
   end
 
   private
+
+  def word_yahoo?(result)
+    result.match(/^[^\n]+\n([^\s]+)/)[1] == 'ふー'
+  end
 
   def shiritori?(word)
     last_word = @redis.get('last_word')
