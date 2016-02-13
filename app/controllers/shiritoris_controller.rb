@@ -65,7 +65,11 @@ class ShiritorisController < ApplicationController
   end
 
   def check_shiritori?(last_word, word)
-    if to_hw_katakana(last_word).gsub(/(ﾞ|ﾟ)/, '').last == to_hw_katakana(word).gsub(/(ﾞ|ﾟ)/, '').first
+    # 前回の単語が伸ばし棒で終わる場合の処理
+    check_chara_num = last_word.last == 'ー' ? 1 : 2
+
+    # 半濁点・濁点を除いて比較
+    if to_hw_katakana(last_word).gsub(/(ﾞ|ﾟ)/, '')[check_chara_num] == to_hw_katakana(word).gsub(/(ﾞ|ﾟ)/, '').first
       @redis.set('last_word', word)
       return true
     end
