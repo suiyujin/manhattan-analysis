@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'shiritoris' => 'shiritoris#analysis'
+  post 'shiritoris' => 'shiritoris#analysis'
 
   post 'hello' => 'hello#greet_with_name'
 
