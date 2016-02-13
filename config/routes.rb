@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'shiritoris' => 'shiritoris#analysis'
+
   post 'hello' => 'hello#greet_with_name'
 
   # The priority is based upon order of creation: first created -> highest priority.
