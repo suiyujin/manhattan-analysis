@@ -65,6 +65,9 @@ class ShiritorisController < ApplicationController
   end
 
   def check_shiritori?(last_word, word)
+    # 「ん」で終わるのはダメ
+    return false if word.last == 'ん'
+
     # 前回の単語が伸ばし棒で終わる場合の処理
     check_chara_num = last_word.last == 'ー' ? 1 : 2
 
