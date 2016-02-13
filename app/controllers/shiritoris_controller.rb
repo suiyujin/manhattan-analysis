@@ -26,7 +26,7 @@ class ShiritorisController < ApplicationController
     word = result.match(/^[^\s]+/)[0]
     logger.info("word : #{word}")
 
-    if result =~ /\A0/
+    if result =~ /\A0/ || word == 'error'
       logger.info("0 : 認識不可!")
       res_json = { status: 0, message: "認識不可！" }
     elsif word.size < WORD_SIZE
