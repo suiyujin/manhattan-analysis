@@ -24,7 +24,11 @@ class ShiritorisController < ApplicationController
     end
 
     # Zinnia, Mecubで調べる
+    if params[:yahoo].present?
+      csv_filenames = ['data1.csv', 'data2.csv', 'data3.csv']
+    end
     csv_file_path = csv_filenames.map { |cf| "#{home_dir}/manhattan_csv/#{cf}" }
+
     result = `democheckword #{csv_file_path.join(' ')}`
     word = result.match(/^[^\s]+/)[0]
     logger.info("word : #{word}")
