@@ -73,7 +73,7 @@ class ShiritorisController < ApplicationController
 
     # 半濁点・濁点を除いて比較
     if to_hw_katakana(last_word).gsub(/(ﾞ|ﾟ)/, '')[check_chara_num] == to_hw_katakana(word).gsub(/(ﾞ|ﾟ)/, '').first
-      @redis.set('last_word', word)
+      # @redis.set('last_word', word)
       return true
     end
     false
